@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Component Exercise</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://fb.me/react-15.0.0.js"></script>
+    <script src="https://fb.me/react-dom-15.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+</head>
+<body>
+
+<div id="container">I am a container</div>
+
+<script type="text/babel">
+    var MyComponent=React.createClass({
+        getInitialState: function() {
+            return {editing: false};
+        },
+        edit: function() {
+            this.setState({editing: true});
+        },
+        remove: function() {
+            this.props.deleteFromBoard(this.props.index);
+        },
+        save: function() {
+            console.log("The new value is: "+this.refs.newText.value);
+            console.log("The index in the components array is: "+this.props.index);
+            console.log("The editing state is: "+this.state.editing);
+            this.props.updateComponentText(this.refs.newText.value, this.props.index);
+            this.setState({editing: false});
+        },
+        renderNormal: function() {
+            return (
+                    <div>
+                        <div className="commentContainer">{this.props.children}</div>
+                        <button onClick={this.edit} className="buttonEdit">Edit</button>
+                        <button onClick={this.remove} className="buttonRemove">Remove</button>
+                    </div>
+            );
+        },
+        renderform: function() {
+            return (
+                    <div>
+                        <textarea ref="newText" defaultValue={this.props.children} className="textarea"></textarea>
+                        <button onClick={this.save} className="buttonSave">Save</button>
+                    </div>
+            );
+        },
+        render: function () {
+            if (this.state.editing) {
+                return this.renderform();
+            } else {
+                return this.renderNormal();
+            }
+        }
+    });
+
+    var Board = React.createClass({
+        getInitialState: function() {
+            return {
+                components:[]
+            }
+        },
+
+        add: function(text) {
+            var arr = this.state.components;
+            arr.push(text);
+            this.setState({components: arr});
+        },
+
+        removeComponent: function(i) {
+            console.log(this.state);
+            var arr = this.state.components;
+            arr.splice(i,1);
+            this.setState({components: arr});
+        },
+
+        updateComponent: function(newText, i) {
+            console.log("this.state is: "+this.state);
+            var arr = this.state.components;
+            arr[i] = newText;
+            this.setState({components: arr});
+        },
+
+        eachComponent: function(text, i) {
+            return (
+                    <MyComponent key={i} index={i} updateComponentText={this.updateComponent.bind(this)} deleteFromBoard={this.removeComponent}>
+                        {text}
+                    </MyComponent>);
+        },
+
+        render: function () {
+            return (
+                    <div>
+                        <button onClick={this.add.bind(null, 'Default text')} className="AddButton">Add new</button>
+                        <div className="board">
+                            {
+                                this.state.components.map(this.eachComponent)
+                            }
+                        </div>
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(<Board />, document.getElementById('container'));
+
+</script>
+
+</body>
+</html>
