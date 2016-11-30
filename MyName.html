@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Andrei Ene</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+ <div id="content"> aurel </div>
+
+<script type="text/jsx">
+
+    var MyComponent = React.createClass({
+        render: function() {
+            return (
+                <div>
+                    <h1>Hi</h1>
+                    <h2>This is my first React experience!</h2>
+                </div>
+            );
+        }
+    });
+
+    React.render(<div><MyComponent/><MyComponent/><MyComponent/><MyComponent/></div>, document.getElementById('content'));
+
+</script>
+
+</body>
+</html>

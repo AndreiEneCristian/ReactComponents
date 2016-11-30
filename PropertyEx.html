@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Andrei Ene</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+  <div id="content"></div>
+
+  <script type="text/jsx">
+
+      var Person = React.createClass({
+          render: function() {
+              return (
+                      <h2>{this.props.name} is {this.props.age} years old</h2>
+              );
+          }
+      });
+
+      React.render(
+              <div>
+                  <Person name="Alice" age="12"/>
+                  <Person name="Sam" age="19"/>
+                  <Person name="Jack" age="21"/>
+                  <Person name="Susan" age="42"/>
+              </div>, document.getElementById('content')
+      );
+
+  </script>
+
+</body>
+</html>

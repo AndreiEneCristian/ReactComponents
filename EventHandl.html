@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Andrei Ene</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+   <div id="content"></div>
+
+   <script type="text/jsx">
+
+       var MyComponent=React.createClass({
+           doSmth: function() {
+               alert("I want to say that: "+this.props.children);
+           },
+           render: function () {
+               return (
+                       <div>
+                           <h1>{this.props.user}</h1>
+                           <a onClick={this.doSmth} href="#">Click</a>
+                       </div>
+               );
+           }
+       });
+
+       React.render(
+               <div>
+                   <MyComponent user="Andrei Ene">This guy is awesome</MyComponent>
+                   <MyComponent user="Susan">I love dragons</MyComponent>
+               </div>, document.getElementById('content')
+       );
+
+   </script>
+
+</body>
+</html>
